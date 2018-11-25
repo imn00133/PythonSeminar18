@@ -3,7 +3,7 @@
 
 Exercise는 주마다 제출한 과제를 정리하였다.
 
-User에는 각 세미나 참여 인원으로 Directory를 만들었으며, 각자의 git으로 관리되는 과제 제출 Directory이다.
+User는 과제 제출 Directory이다. 각 세미나 참여 인원으로 Directory를 만들고, 각자의 git으로 관리된다.
 
 Diary는 수업을 진행하면서 생각한 점 및 개선점, 평가를 적어두었다.
 
