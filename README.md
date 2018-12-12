@@ -27,7 +27,6 @@ Diary는 수업을 진행하면서 생각한 점 및 개선점, 평가를 적어
 * 파이썬 코딩의 기술
 * 엔지니어를 위한 파이썬
 * 파이썬 JUPYTER NOTEBOOK 실전 입문
-* 객체지향 소프트웨어 공학
 
 참고링크:  
 * [점프 투 파이썬](https://wikidocs.net/book/1)
@@ -39,6 +38,9 @@ Diary는 수업을 진행하면서 생각한 점 및 개선점, 평가를 적어
 * [python 시작하기:Django Girls Tutorial](https://tutorial.djangogirls.org/ko/python_introduction/)
 * [예제로 배우는 Python 프로그래밍](http://pythonstudy.xyz/)
 * [Reference Guide - pip 18.1 documentation](https://pip.pypa.io/en/stable/reference/)
+* [A Byte of Python](http://byteofpython-korean.sourceforge.net/byte_of_python.html)
 
 참고자료:
 * 리눅스 마스터 1급 정복하기
+* 쉽게 배우는 알고리즘: 관계중심의 사고법
+* 객체지향 소프트웨어 공학
