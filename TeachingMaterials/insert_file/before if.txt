@@ -1,0 +1,70 @@
+x = 123
+# if문 앞
+if x == 234:
+	#if문 내부
+#if문 뒤
+
+_main:
+	......
+	movl $123, -8(%rbp)
+	# if문 앞
+	movl -8(%rbp), %eax
+	cmpl $456, %eax
+	jne  LBB1_2
+	# if문 안
+LBB1_2:
+	# if문 뒤
+	
+# if문 앞
+if x > 0:
+    # 양수일 경우 처리
+elif x < 0:
+    # 음수일 경우 처리
+else:
+    # 0일 경우 처리
+# if문 뒤
+
+_main:
+    ......
+    # if문 앞
+    movl    -8(%rbp), %eax
+    cmpl    $0, %eax
+    jl      LBB1_2
+    # 양수일 경우 처리
+    jmp     LBB1_5
+LBB1_2:
+    movl    -8(%rbp), %eax
+    cmpl    $0, %eax
+    jg      LBB1_4
+    # 음수일 경우 처리
+    jmp     LBB1_5
+LBB1_4:
+    # 0일 경우 처리
+LBB1_5:
+    # if문 뒤
+
+void not_use_if(int x){
+    if(x <= 0) goto NOT_POSITIVE;
+    printf("양수\n");
+    goto EN;
+  NOT_POSITIVE:
+    if(x >= 0) goto NOT_NEGATIVE;
+    printf("음수\n");
+    goto END;
+  NOT_NEGATIVE:
+    print("0\n");
+  END:
+    return;
+}
+
+void use_if(int x){
+    if(x > 0){
+        printf("양수\n");
+    }
+    else if(x < 0){
+        printf("음수\n");
+    }
+    else{
+        print("0\n");
+    }
+}
