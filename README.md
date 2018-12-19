@@ -40,6 +40,7 @@ Diary는 수업을 진행하면서 생각한 점 및 개선점, 평가를 적어
 * [예제로 배우는 Python 프로그래밍](http://pythonstudy.xyz/)
 * [Reference Guide - pip 18.1 documentation](https://pip.pypa.io/en/stable/reference/)
 * [A Byte of Python](http://byteofpython-korean.sourceforge.net/byte_of_python.html)
+* [누구나 쉽게 이해할 수 있는 Git입문](https://backlog.com/git-tutorial/kr/)
 
 참고자료:
 * 리눅스 마스터 1급 정복하기
