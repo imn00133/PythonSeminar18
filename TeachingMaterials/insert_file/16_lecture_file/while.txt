@@ -1,0 +1,8 @@
+void not_use_while(int x){
+	print("not_use_while\n");
+	LOOP:
+		if(x < 0) goto END;
+		print("loop!\n);
+	goto LOOP;
+	END:
+}
