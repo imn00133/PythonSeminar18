@@ -1,1 +1,1 @@
-print("Why not unicode")
+print("ㅇㅇ")
