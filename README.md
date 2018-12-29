@@ -7,7 +7,8 @@ User는 과제 제출 Directory이다. 각 세미나 참여 인원으로 Directo
 
 Diary는 수업을 진행하면서 생각한 점 및 개선점, 평가를 적어두었다.
 
-TeachingMaterials에는 강의 자료 및 강의 자료에 들어간 파일, git 실험 파일들이 들어가있다. 
+TeachingMaterials에는 강의 파일 및 강의 자료에 들어간 파일, git 실험 파일들이 들어가있다.  
+강의 자료는 TeachingMaterials/lecuter_file 디렉터리 내부를 참고한다.
 
 만든이: 일병 김재형  
 이메일: imn00133@gmail.com   
@@ -45,6 +46,8 @@ TeachingMaterials에는 강의 자료 및 강의 자료에 들어간 파일, git
 * [A Byte of Python](http://byteofpython-korean.sourceforge.net/byte_of_python.html)
 * [누구나 쉽게 이해할 수 있는 Git입문](https://backlog.com/git-tutorial/kr/)
 * [TCP school](http://tcpschool.com/)
+* [리보그 세상](http://reeborg.ca/docs/k)
+* [PyAutoGUI](https://pyautogui.readthedocs.io/en/latest/?fbclid=IwAR0gzIkD4VmsL8nz7jUgjWj9eTsLSVl_eLHek38wH6-NcHN_R8ITdhzemEE#)
 
 참고자료:
 * 리눅스 마스터 1급 정복하기
