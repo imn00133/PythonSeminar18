@@ -14,12 +14,12 @@
 본인의 디렉터리 아래에 vending_machine 디렉터리를 만들어 저장한다
 아스키코드를 넣어 외형을 꾸며도 좋다.
 """
-money = input("돈을 넣으세요: ")
+money = int(input("돈을 넣으세요: "))
 
 print("1. 오라떼 사과(550원)")
 print("2. 오란C 오렌지맛(550원)")
 print("3. 갈아만든 배(800원)")
 print("4. 박카스F(1000원)")
 print("거스름돈")
-print("넣은 돈:%s원" %money)
-#print("넣은 돈:",money,"원")
+print("넣은 돈:%d원" % money)
+# print("넣은 돈:",money,"원")
