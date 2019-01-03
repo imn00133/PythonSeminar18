@@ -1,0 +1,6 @@
+Detect whether a Python string is a number or a letter
+https://stackoverflow.com/questions/40097590/detect-whether-a-python-string-is-a-number-or-a-letter
+
+GUI - qtdesigner
+https://nanite.tistory.com/53
+https://tariat.tistory.com/209
