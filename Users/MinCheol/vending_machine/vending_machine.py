@@ -6,14 +6,14 @@
 """
 
 cur_money = input("금액 입력하세요 : ")
-while cur_money.isnumeric() == False:
-    cur_money = input("숫자만 : ")
+# while not cur_money.isnumeric():
+#     cur_money = input("숫자만 : ")
 print('''1. 에스프레소(4000원)
 2. 카페라떼(4500원)
 3. 카라멜 마끼아또(5500원)
 4. 카페모카(5500원)
 5. 거스름돈
-넣은 돈 : %s''' %cur_money)
+넣은 돈 : %s''' % cur_money)
 
 
 

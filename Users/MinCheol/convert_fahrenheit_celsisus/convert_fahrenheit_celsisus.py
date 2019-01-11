@@ -10,12 +10,12 @@
 f_temp = 0
 c_temp = 0
 
-f_temp = input("화씨 온도 입력 : ")
-while f_temp.isnumeric() == False:
-    f_temp = input("숫자만 : ")
-c_temp = (int(f_temp)-32)*5/9
+f_temp = float(input("화씨 온도 입력 : "))
+# while not f_temp.isnumeric():
+#    f_temp = input("숫자만 : ")
+c_temp = (f_temp-32)*5/9
 
-print("%s℉ >> %0.2f℃" %(f_temp, c_temp))
+print("%0.2f℉ >> %0.2f℃" %(f_temp, c_temp))
 
 
 
