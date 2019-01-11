@@ -1,6 +1,4 @@
-a = {1, 3}
-a.clear()
-print(a)
+print({1, 3, 5}.isdisjoint({3, 4}))
 
 '''
 A = set([a, b, ...])
