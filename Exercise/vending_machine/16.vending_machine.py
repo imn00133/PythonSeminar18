@@ -31,10 +31,7 @@ while True:
 
     elif select_value == (len(item_list) - 1):
         input_money = int(input("돈을 넣으세요: "))
-        if input_money < 0:
-            break
-        else:
-            total_money += input_money
+        total_money += input_money
 
     elif 0 < select_value <= len(item_price.keys()):
         # list는 0부터 시작하기 때문에 계산의 편의를 위해 -1을 한다.
@@ -47,6 +44,10 @@ while True:
                 total_money = 0
         else:
             print("돈이 부족합니다. 돈을 더 넣어주세요.")
+
+    # 프로그램 종료조건
+    elif select_value < 0:
+        break
     else:
         print("물품번호를 잘못 입력하셨습니다.")
 
