@@ -4,3 +4,27 @@ https://stackoverflow.com/questions/40097590/detect-whether-a-python-string-is-a
 GUI - qtdesigner
 https://nanite.tistory.com/53
 https://tariat.tistory.com/209
+
+exception
+https://docs.python.org/ko/3/tutorial/errors.html
+https://code.tutsplus.com/ko/tutorials/professional-error-handling-with-python--cms-25950
+
+장고
+https://www.inflearn.com/course/django-web-programming/?fbclid=IwAR2cXEC1c7_8zYvWz6_RRFoeiwWab6BFsDvzSAQRkpwO62_2GXmNS2lBbhU
+https://tutorial.djangogirls.org/ko/
+
+python path
+파일과 디렉터리 경로 다루기
+http://pythonstudy.xyz/python/article/507-%ED%8C%8C%EC%9D%BC%EA%B3%BC-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC
+상위, 하위, 동일 폴더 내 모듈 import
+http://brownbears.tistory.com/296
+절대, 상대, 현재 경로 찾기
+https://wikidocs.net/3716
+현재 디렉터리 위치 알기
+https://hashcode.co.kr/questions/197/python%EC%9C%BC%EB%A1%9C-%ED%98%84%EC%9E%AC-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EC%9C%84%EC%B9%98%EB%A5%BC-%EC%95%8C%EC%95%84%EB%82%B4%EB%8A%94-%EB%B0%A9%EB%B2%95
+sys.path
+https://docs.python.org/ko/3/library/sys.html#sys.path
+As initialized upon program startup, the first item of this list, path[0], is the directory containing the script that was used to invoke the Python interpreter. If the script directory is not available (e.g. if the interpreter is invoked interactively or if the script is read from standard input), path[0] is the empty string, which directs Python to search modules in the current directory first. Notice that the script directory is inserted before the entries inserted as a result of PYTHONPATH.
+
+git rebase
+http://jusths.tistory.com/60?category=786257
