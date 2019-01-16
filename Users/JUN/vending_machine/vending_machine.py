@@ -1,42 +1,44 @@
-def Dche(Don, value):
-    if Don-value > 0:
-        return False
-    return True
+import os
+import sys
+from time import sleep
 
 
-def JanDon(Don, value):
-    print("%d" % int(Don - value))
+def bujok():
+    print("저런저런 돈이 부족하다구 친구")
 
 
-Don = (int)(input("돈을 넣으세요: "))
-print("1. 블랙말랑카우(100원)")
-print("2. 밀크커피(150원)")
-print("3. 고급시계(39900원)")
-print("4. 거스름돈")
-print("넣은 돈 : %d원" % Don)
-mool = (int)(input("뽑을 물품을 골라주세요: "))
-if mool == 1:
-    if Dche(Don, 100):
-        print("돈이 부족합니다.")
-        JanDon(Don, 0)
+def Dche(Don):
+    if Don > 0:
+        print("%d원 마이쪙" % Don)
     else:
-        print("블랙말랑카우이/가 나왔습니다.")
-        JanDon(Don, 100)
-elif mool == 2:
-    if Dche(Don, 150):
-        print("돈이 부족합니다.")
-        JanDon(Don, 0)
-    else:
-        print("밀크커피이/가 나왔습니다.")
-        JanDon(Don, 150)
-elif mool == 3:
-    if Dche(Don, 39900):
-        print("돈이 부족합니다.")
-        JanDon(Don, 0)
-    else:
-        print("고급시계이/가 나왔습니다.")
-        JanDon(Don, 39900)
-elif mool == 4:
-    JanDon(Don, 0)
-else:
-    print("물품번호를 잘못 입력하셨습니다")
+        print("%d원 반환" % Don)
+
+
+moolgun = ["블랙말랑카우", "밀크커피", "고급시계"]
+ga_guek = [100, 150, 39900]
+Don = (int)(input("초기배팅금액 입력:"))
+while True:
+    print("1. 블랙말랑카우(100원)")
+    print("2. 밀크커피(150원)")
+    print("3. 고급시계(39900원)")
+    print("4. 돈좀 넣으쉴?")
+    print("5. 거스름돈")
+    sel = (int)(input("선택: "))
+    if sel < 0:
+        Dche(Don)
+        break
+    elif sel == 0:
+        print("Ang↗?")
+    elif sel < 4:
+        if Don < ga_guek[sel-1]:
+            bujok()
+        else:
+            Don -= ga_guek[sel-1]
+            print("%s가 나왔습니다." % moolgun[sel-1])
+    elif sel == 4:
+        Don += (int)(input("감사합니다.: "))
+    if Don < min(ga_guek) or sel == 5:
+        Dche(Don)
+        Don = 0
+    sleep(1)
+    os.system('clear')
