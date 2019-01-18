@@ -9,7 +9,9 @@ try:
 except IndexError as e:
     print("인덱스 범위가 아닙니다.")
     print(type(e))
+    print(e)
 
 except ZeroDivisionError as e:
     print("0으로 나눌 수 없습니다.")
-
+    print(type(e))
+    print(e)
