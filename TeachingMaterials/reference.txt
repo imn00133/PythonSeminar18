@@ -28,3 +28,11 @@ As initialized upon program startup, the first item of this list, path[0], is th
 
 git rebase
 http://jusths.tistory.com/60?category=786257
+
+python open(mode) +가 있을 때와 없을 때.
+https://stackoverflow.com/questions/1466000/python-open-built-in-function-difference-between-modes-a-a-w-w-and-r
+
+합천영상테마파크
+
+josn pickle 데이터 저장
+https://docs.python.org/ko/3/tutorial/inputoutput.html
