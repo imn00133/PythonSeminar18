@@ -13,7 +13,7 @@ win = 0
 change_win = 0
 current_rotation_num = 0
 while current_rotation_num < rotation_num:
-    # 사건이 독립적임으로, 맨 첫번째가 당첨으로 고정한다.
+    # 사건이 독립적임으로, 맨 첫번째를 당첨으로 고정한다.
     door = [0] * door_num
     door[0] = 1
 
