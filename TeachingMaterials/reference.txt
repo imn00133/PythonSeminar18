@@ -36,3 +36,40 @@ https://stackoverflow.com/questions/1466000/python-open-built-in-function-differ
 
 josn pickle 데이터 저장
 https://docs.python.org/ko/3/tutorial/inputoutput.html
+
+객체 모델링 책
+https://www.popit.kr/%EA%B0%9D%EC%B2%B4-%EB%AA%A8%EB%8D%B8%EB%A7%81-%EA%B3%B5%EB%B6%80%ED%95%98%EA%B2%8C-%EC%B1%85-%ED%95%98%EB%82%98-%EC%B6%94%EC%B2%9C%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94/
+
+싸지방에서 코딩을 해봅시다.
+https://lalafell.network/lalafell/coding-on-ssajibang
+
+공공데이터포털
+https://www.data.go.kr/dataset/3072459/fileData.do
+
+나만의 웹 크롤러 만들기
+https://beomi.github.io/gb-crawling/
+
+assert 문
+https://docs.python.org/3/reference/simple_stmts.html#assert
+https://stackoverflow.com/questions/5142418/what-is-the-use-of-assert-in-python
+
+카카오페이지 웹 React 포팅 후기
+https://medium.com/@ljs0705/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%9B%B9-react-%ED%8F%AC%ED%8C%85-%ED%9B%84%EA%B8%B0-76402cc5e031
+Jongseok Lee 답변들 감사합니다. 저는 jsp php 로 홈페이지를 주로 만들고싶은데요... 추천해주실만한 자바스크립트 프레임워크(?)를 추천해주실 수 있으신가요? spring과 laravel을 주로 사용합니다 !
+나윤환
+나윤환 Jongseok Lee 라라벨과 스프링이 프레임워크입니다. 다른 프레임워크를 쓴다면 저 두 개가 아닌 다른 환경을 써야합니다 ㅎㅎ
+Jongseok Lee 나윤환 아 그렇다면 이 프레임워크들 안에서 자바스크립트가 동작하는 방식이 다르다는 말씀이신가요? 저 두가지를 최근부터 시작하게되서 이해가잘안되네요.. 예를들어 라라벨안에서 자바스크립트를 동작시키는 방식이 순수자바스크립트와는 다른것인가요?
+Jongseok Lee 그렇다면 현재 짜고있는 순수자바스크립트코드들은 프레임워크안에서는 무용지물인건가요..?
+양정윤 JSP, PHP는 서버에서 HTML을 랜더링해서 내려주는 방식인거고, 최근 자바스크립트 웹 프레임워크(React, Vue, Angular)라 함은 브라우저 코드(클라이언트)에서 자체적으로 HTML을 랜더링하고 데이터는 RESTful API로 받아오는 형태를 말합니다.
+나윤환 Jongseok Lee. 라라벨은 php를 이용해서 서버사이드를 구성하게끔하는 프레임워크고, 스프링은 java를 이용해서 서버사이드를 구성하게끔 하는 프레임워크죠
+요즘은 서버사이드와 클라이언트 사이드를 분리하는 추세입니다.
+React나 vue, angular로 클라이언트 사이드를 구축하고, 서버는 php를 쓴다면 라라벨, js를 쓴다면 Node, 자바를 쓴다면 스프링 등.. 다양한 서버사이드 프레임워크를 이용해서 Restful Api로 서로 통신합니다
+나윤환 이후 더 나아가면 SSR(서버 사이드 렌더링)이나 GraphQL도 공부하면 좋습니다
+나윤환 요약하자면, 최근 웹 개발 트렌드는 클라이언트/서버가 따로 존재하고 클라이언트는 SPA(Single-Page-Application)으로 개발하며,
+서버는 각 언어별 프레임워크(JS-Node, PHP-Laravel, Python-Django, Flask etc..)를 통해서 RESTful API를 구축하고
+클라이언트와 서버간 통신은 비동기로 처리합니다.
+SPA에 대해서 좀 더 검색하시면 트렌드가 많이 나올거에요
+양정윤 지금 SPA 프레임워크 시장에서 리액트 지분이 70% 정도로 지배적인 것 같고요. 뷰가 점유율 25% 대안으로 주목 받고 있으며, 앵귤러는 많이 죽은것 같습니다. 그러므로 리액트나 뷰 중에 선택하시는게 무난할 것 같네요. 서버는 스프링이든 라라벨이던 RESTful API를 제공할 수 만 있다면 뭐든 상관 없을 것 같습니다
+박하현 개인적으론 라라벨 진영에서 뷰를 밀고있기 때문에, 뷰를 추천합니다! 러닝커브도 리액트보다 낮기도 하고요.
+
+이것이 자바다. 자바의 신
