@@ -10,3 +10,6 @@ except IndexError as e:
 else:
     print("인덱스 범위입니다.")
 
+finally:
+    print("언제나 실행됩니다.")
+
