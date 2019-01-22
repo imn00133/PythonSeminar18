@@ -1,0 +1,213 @@
+def item_price_min(item_list):
+    """
+    item dict에서 가격이 가장 작은 값을 반환한다.
+    """
+    price_min = item_list[0]['가격']
+    for item in item_list:
+        if price_min > item['가격']:
+            price_min = item['가격']
+    return price_min
+
+
+def return_charge(item_list, total_money):
+    """
+    돈을 반환해주는 함수. total_money를 0으로 만들기 위해 0을 반환
+    """
+    write_item_file(item_list)
+    print("돈을 반환합니다: %d원" % total_money)
+    return 0
+
+
+def cont_str():
+    """
+    자판기의 종료, 돈 입력 같은 제어명령를 저장한 딕셔너리를 반환해 준다.
+    퍼미션에 따라 다른 값이 출력된다.
+    'admin': 개수변경, 종료
+    'normal': 돈 입력, 거스름돈, 종료
+    :return CONTROL_STR, 딕셔너리이고 값은 튜플
+    """
+    CONTROL_STR = {
+        'admin': ('물품출력', '개수추가', '종료'),
+        'normal': ('돈 입력', '거스름돈', '종료'),
+        'error': ('종료')
+        }
+    return CONTROL_STR
+
+
+def cont_str_index(item_list, searching_value, permission='normal'):
+    """
+    item_list와 seacrching_value를 받아 제어명령 딕셔너리의 위치를 반환한다.
+    index를 통해 searching_value를 찾는다.
+    :params item_list, searching_value, permission='normal'
+    :return 제어 명령의 위치
+    """
+    return len(item_list) + cont_str()[permission].index(searching_value) + 1
+
+
+def cont_print(permission='normal'):
+    """
+    control string을 출력한다.
+    퍼미션이 admin이면, item_list을 포함하지 않고 index를 출력하고
+    퍼미션이 normal이면 item_list을 포함하여 index를 출력한다.
+    :param permission='normal'
+    """
+    if permission == 'admin':
+        for index, control_content in enumerate(cont_str()[permission], 1):
+            print("{0}. {1}".format(index, control_content))
+    else:
+        for index, control_content in enumerate(cont_str()[permission],
+                                                len(item_list) + 1):
+            print("{0}. {1}".format(index, control_content))
+
+
+def item_print(item_list, permission='normal'):
+    """
+    아이템 목록을 출력한다.
+    permission이 admin이면 개수를 보여준다.
+    permission이 normal이면 제어 명령도 출력한다.
+    :params item_list, permission='normal'
+    """
+    for index in range(len(item_list)):
+        print("{0}. {1}({2}원)".format(index + 1, item_list[index].get('물품'),
+                                      item_list[index]['가격']), end='')
+        if permission == 'admin':
+            print(" 개수: {0}".format(item_list[index]['개수']))
+        else:
+            print("")
+    if permission != 'admin':
+        cont_print()
+
+
+def admin_mode(item_list):
+    """
+    admin모드로 접근한다. permission은 admin으로 되어있다.
+    :param item_list
+    :return item_list
+    """
+    while True:
+        print("")
+        cont_print(permission='admin')
+        select_value = int(input("원하는 작업을 선택해주세요: "))
+        print("")
+        if select_value == cont_str_index({}, '물품출력', 'admin'):
+            item_print(item_list, permission='admin')
+        elif select_value == cont_str_index({}, '개수추가', 'admin'):
+            item_print(item_list, permission='admin')
+            item_select = int(input("개수를 추가할 물품을 선택하세요: "))
+            if 0 < item_select <= len(item_list):
+                item_list[item_select - 1]['개수'] += \
+                    int(input("추가할 개수를 입력해주세요: "))
+            else:
+                print("물품을 잘못 선택하셨습니다.")
+        elif select_value == cont_str_index({}, '종료', 'admin'):
+            write_item_file(item_list)
+            print("자판기 모드로 돌아갑니다.")
+            return item_list
+        else:
+            print("잘못 입력하셨습니다.")
+
+
+def converse_data_to_int(conversion_dict):
+    conversion_key = ("가격", "개수")
+    for key in conversion_key:
+        conversion_dict[key] = int(conversion_dict[key])
+    return conversion_dict
+
+
+def read_item_file():
+    item_list = []
+    try:
+        with open("item_list.txt", mode='r', encoding='utf-8') as file:
+            title = file.readline().split()
+            # 파일에 오류가 있을 때, 발생할 수 있는 오류를 넣는다.
+            while True:
+                item_temp_dict = {}
+                item = file.readline().split()
+                if not item:
+                    break
+                for index in range(len(title)):
+                    item_temp_dict[title[index]] = item[index]
+                converse_data_to_int(item_temp_dict)
+                item_list.append(item_temp_dict)
+    except Exception:
+        print("관리자에게 연락하십시오.")
+    return item_list
+
+
+def write_item_file(item_list):
+    # 다음에 오류발생을 넣는다. if len(item_list)==0:
+    title = item_list[0].keys()
+    with open("item_list.txt", mode='w', encoding='utf-8') as file:
+        title_temp = ""
+        for str_temp in title:
+            title_temp += str(str_temp)
+            title_temp += " "
+        file.write("%s\n" % title_temp)
+        for item_dict in item_list:
+            str_temp = ""
+            for key in title:
+                str_temp += str(item_dict[key])
+                str_temp += " "
+            file.write("%s\n" % str_temp)
+        return None
+
+
+item_list = read_item_file()
+total_money = 0
+while True:
+    print("")
+    select_value = ''
+    if not item_list:
+        break
+    price_min = item_price_min(item_list)
+
+    # 목록의 리스트를 출력한다.
+    # isinstance(object, type) object에 입력된 type이 type과 같은지 확인한다.
+    while not isinstance(select_value, int):
+        item_print(item_list)
+        print("현재까지 넣은 돈은 %d원입니다." % total_money)
+        select_value = input("뽑을 물품을 골라주세요: ")
+
+        # admin모드 진입
+        if select_value == 'admin':
+            item_list = admin_mode(item_list)
+        elif select_value.isnumeric():
+            select_value = int(select_value)
+
+    # 돈 입력 및 거스름돈을 선택했을 때
+    if select_value == cont_str_index(item_list, '거스름돈'):
+        total_money = return_charge(item_list, total_money)
+
+    elif select_value == cont_str_index(item_list, '돈 입력'):
+        input_money = int(input("돈을 넣으세요: "))
+        if input_money < 0:
+            print("잘못 입력하셨습니다.")
+        else:
+            total_money += input_money
+
+    # 물품을 선택할 때
+    elif 0 < select_value <= len(item_list):
+        select_value -= 1
+        item_value = item_list[select_value]['가격']
+        if total_money < item_value:
+            print("돈이 부족합니다. 돈을 더 넣어주세요.")
+        elif item_list[select_value]['개수'] <= 0:
+            print("물품 개수가 부족합니다. 관리자를 불러주세요.")
+        else:
+            total_money -= item_value
+            item_list[select_value]['개수'] -= 1
+            print(item_list[select_value]['개수'])
+            print("%s이/가 나왔습니다." % item_list[select_value]['물품'])
+            if total_money < price_min:
+                total_money = return_charge(item_list, total_money)
+
+    # 종료를 누르면 종료
+    elif select_value == cont_str_index(item_list, '종료'):
+        break
+
+    # 그 외 물품번호를 잘못 입력
+    else:
+        print("물품번호를 잘못 입력하셨습니다.")
+
+return_charge(item_list, total_money)
+print("자판기 프로그램을 종료합니다.")
