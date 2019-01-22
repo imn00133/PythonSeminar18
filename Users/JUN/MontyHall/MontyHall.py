@@ -4,7 +4,7 @@ import os
 import sys
 
 
-def che():
+def che(l_cho, door_open):
     for i in door_open[0:k]:
         if i == l_cho:
             return True
@@ -34,7 +34,7 @@ for i in range(1, m+1):
         w_cou += 1
     while True:
         l_cho = random.randrange(0, n)
-        if l_cho == choice or che():
+        if l_cho == choice or che(l_cho, door_open):
             continue
         break
     choice = l_cho
