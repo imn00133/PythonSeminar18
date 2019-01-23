@@ -155,11 +155,11 @@ def write_item_file(item_list):
 item_list = read_item_file()
 total_money = 0
 while True:
-    print("")
     select_value = ''
     if not item_list:
         break
     price_min = item_price_min(item_list)
+    print("")
 
     # 목록의 리스트를 출력한다.
     # isinstance(object, type) object에 입력된 type이 type과 같은지 확인한다.
@@ -203,11 +203,10 @@ while True:
 
     # 종료를 누르면 종료
     elif select_value == cont_str_index(item_list, '종료'):
+        return_charge(item_list, total_money)
+        print("자판기 프로그램을 종료합니다.")
         break
 
     # 그 외 물품번호를 잘못 입력
     else:
         print("물품번호를 잘못 입력하셨습니다.")
-
-return_charge(item_list, total_money)
-print("자판기 프로그램을 종료합니다.")
