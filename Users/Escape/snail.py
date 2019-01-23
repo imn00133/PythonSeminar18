@@ -7,6 +7,8 @@ elif m > 30 or n > 30:
     print('행과 열의 수는 각각 30을 넘어갈 수 없습니다.')
 else:
     # 빈 행렬 만들기
+    # [None for x in range(m)] >> m개의 None으로 이루어진 리스트
+    # [[~] for x in range(n)] >> 위의 리스트 n개로 이루어진 리스트
     matrix = [[None for x in range(m)] for x in range(n)]
 
     # 처리
