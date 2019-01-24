@@ -64,6 +64,7 @@ while True:
                     money = 0
                 else:
                     print('잔액이 없어 돈이 반환되지 않습니다.')
+                print('자판기 이용을 종료합니다.')
                 break
             # 물품을 선택한 경우
             else:
