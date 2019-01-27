@@ -10,7 +10,7 @@ while True:
     print("넣은 돈:%d원" % money)
 
     num = int(input("뽑으실 물품을 골라주십시오 : "))
-    
+
     if num < 0:
         print("종료합니다")
         break
