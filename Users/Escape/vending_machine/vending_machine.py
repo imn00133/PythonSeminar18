@@ -1,20 +1,58 @@
+# 이름, 가격, 개수 저장/로드 구현
+# 관리자에게 연락하십시오 구현
+# 파일 자동 저장 미구현
+
+# 파일로부터 물품 불러오기
+# 뭔가 나중에 쓸 것 같아서 함수로 남겨놓습니다.
+
+
+def load_product(file_name='product.met'):
+    result = list()
+    with open(file_name, mode='r', encoding='UTF-8') as f:
+        for line in f.readlines():
+            if line[0] == '(' and line[-2] == ')':
+                product = line[1:len(line) - 2].split(',')
+                for i, detail in enumerate(product):
+                    product[i] = detail.strip()
+                product[1], product[2] = int(product[1]), int(product[2])
+                result.append(product)
+    return result
+
+
+def save_product(product_list, file_name='product.met'):
+    with open(file_name, mode='w', encoding='UTF-8') as f:
+        for product in product_list:
+            product[1], product[2] = str(product[1]), str(product[2])
+            f.write('(%s)\n' % ', '.join(product))
+    return len(product)
+
+
+# 프로그램 시작
+# 초기 물품 구성
+try:
+    product_list = load_product()
+    if len(product_list) == 0:
+        raise FileNotFoundError
+except FileNotFoundError:
+    print('관리자에게 연락하십시오.')
+    exit()
+
+# 돈 넣기
 money = 0
 money_in = input('돈을 넣으세요: ')
 
 # 돈 대신 이상한 거 넣으면 걸러내는 부분
-while not money_in.isnumeric():
-    money_in = input('돈을 제대로 넣으세요: ')
+while True:
+    try:
+        if int(money_in) < 0:
+            raise ValueError
+    except ValueError:
+        # 실패할 경우 다시 입력받습니다.
+        money_in = input('돈을 제대로 넣으세요: ')
+    else:
+        money += int(money_in)
+        break
 
-# 제대로 넣었으면 넣은 돈을 money에 추가합니다.
-money += int(money_in)
-
-# 초기 물품 구성
-product_list = list()
-product_list.append(['멧뚜기', 100, 100])
-product_list.append(['보라메', 500, 100])
-product_list.append(['비둘기', 800, 100])
-product_list.append(['멧돼지', 1200, 100])
-product_list.append(['늑대와흑우컴퓨터', 3000, 100])
 
 # 물품을 불러와서 출력합니다.
 # cnt = 물품의 index(출력 이후, cnt는 전체 물품 개수가 됩니다.)
@@ -23,7 +61,7 @@ mode = 'customer'
 while True:
     if mode == 'customer':
         for cnt, (p_name, p_price, p_stock) in \
-             enumerate(product_list, start=1):
+                enumerate(product_list, start=1):
             print(
                 '%d. %s(%d원)' %
                 (cnt, p_name, p_price)
@@ -51,6 +89,7 @@ while True:
                     money_in = input('돈을 제대로 넣으세요: ')
                 money += int(money_in)
             elif product_in == cnt + 2:
+                save_product(product_list)
                 if money > 0:
                     print('%d원이 반환됩니다.' % money)
                     money = 0
@@ -59,13 +98,14 @@ while True:
             # 종료를 시도한 경우
             elif product_in == cnt + 3:
                 # 꼭 그렇게 똑같은 부분을 반복해서 입력해야만 속이 후련했녛어엏ㄱ
+                save_product(product_list)
                 if money > 0:
                     print('%d원이 반환됩니다.' % money)
                     money = 0
                 else:
                     print('잔액이 없어 돈이 반환되지 않습니다.')
                 print('자판기 이용을 종료합니다.')
-                break
+                exit()
             # 물품을 선택한 경우
             else:
                 # 리스트는 0번부터 시작하는데 물품번호는 1번부터 시작이므로 1을 빼줍니다.
@@ -120,6 +160,7 @@ while True:
                       % (product[0], stock_in))
                 product[2] = stock_in
         elif action == '3':
+            save_product(product_list)
             mode = 'customer'
             print('일반(사용자) 모드로 돌아갑니다.')
         else:
