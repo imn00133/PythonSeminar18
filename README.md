@@ -53,6 +53,9 @@ TeachingMaterials에는 강의 파일 및 강의 자료에 들어간 파일, git
 * [TCP school](http://tcpschool.com/)
 * [리보그 세상](http://reeborg.ca/docs/k)
 * [PyAutoGUI](https://pyautogui.readthedocs.io/en/latest/?fbclid=IwAR0gzIkD4VmsL8nz7jUgjWj9eTsLSVl_eLHek38wH6-NcHN_R8ITdhzemEE#)
+* [파이썬을 파이썬답게](https://programmers.co.kr/learn/courses/4008)
+* [Samsung SW Expert Academy](https://swexpertacademy.com/main/main.do)
+* [realpython/python3-OOP](https://realpython.com/python3-object-oriented-programming/)
 
 참고자료:
 * 리눅스 마스터 1급 정복하기
