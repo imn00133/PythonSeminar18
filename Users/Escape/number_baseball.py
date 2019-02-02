@@ -1,4 +1,5 @@
 import random
+import copy
 import os
 
 # 0 ~ 9까지의 수를 무작위로 섞은 후 지정된 자릿수만큼 자른다.
@@ -14,10 +15,12 @@ import os
 
 
 def random_sampling(population, count):
-    if count > len(population):
+    # copy 하지 않으면 참조 값이 전달 되는 듯함(원본이 변경됨)
+    clone = copy.copy(population)
+    if count > len(clone):
         raise ValueError
-    random.shuffle(population)
-    return population[:count]
+    random.shuffle(clone)
+    return clone[:count]
 
 
 # 로그 출력용 함수
@@ -31,10 +34,8 @@ def print_log(log):
 NUM_LIST = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 NUM_CNT = 4
 
-random.shuffle(NUM_LIST)
 answer = random_sampling(NUM_LIST, NUM_CNT)
 os.system('clear')
-
 play_cnt = 0
 log = list()
 while(True):
@@ -105,7 +106,8 @@ while(True):
             i_answer = input('다시 하시겠습니까? ')
             if i_answer.lower() in ('yes', 'y'):
                 # 초기화한 후 반복
-                play_cnt, log = 0, list()
+                play_cnt = 0
+                log.clear
             elif i_answer.lower() in ('no', 'n'):
                 exit()
             else:

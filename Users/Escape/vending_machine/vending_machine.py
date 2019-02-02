@@ -24,6 +24,7 @@ def save_product(product_list, file_name='product.met'):
         for product in product_list:
             product[1], product[2] = str(product[1]), str(product[2])
             f.write('(%s)\n' % ', '.join(product))
+            product[1], product[2] = int(product[1]), int(product[2])
     return len(product)
 
 
