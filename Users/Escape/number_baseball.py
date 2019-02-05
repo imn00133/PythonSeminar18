@@ -1,6 +1,7 @@
 import random
 import copy
 import os
+import sys
 
 # 0 ~ 9까지의 수를 무작위로 섞은 후 지정된 자릿수만큼 자른다.
 # 중복되지 않게 하기 위해 쓰는 방식
@@ -31,10 +32,20 @@ def print_log(log):
 
 
 # 개수를 조절하고 싶으면 NUM_CNT 값을 바꾸면 된다. 최대 10개
-NUM_LIST = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+# NUM_LIST = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+NUM_LIST = [str(x) for x in range(10)]
 NUM_CNT = 4
 
-answer = random_sampling(NUM_LIST, NUM_CNT)
+# 명령 인수로 개수를 입력받을 수도 있음
+if len(sys.argv) == 2 and sys.argv[1].isnumeric():
+    NUM_CNT = int(sys.argv[1])
+
+try:
+    answer = random_sampling(NUM_LIST, NUM_CNT)
+except ValueError:
+    print('개수 설정이 잘못되었습니다. 누가 이런 거야')
+    exit()
+
 os.system('clear')
 play_cnt = 0
 log = list()
@@ -106,6 +117,8 @@ while(True):
             i_answer = input('다시 하시겠습니까? ')
             if i_answer.lower() in ('yes', 'y'):
                 # 초기화한 후 반복
+                answer = random_sampling(NUM_LIST, NUM_CNT)
+                os.system('clear')
                 play_cnt = 0
                 log.clear
             elif i_answer.lower() in ('no', 'n'):

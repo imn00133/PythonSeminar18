@@ -9,7 +9,7 @@ else:
     # 빈 행렬 만들기
     # [None for x in range(m)] >> m개의 None으로 이루어진 리스트
     # [[~] for x in range(n)] >> 위의 리스트 n개로 이루어진 리스트
-    matrix = [[None for x in range(m)] for x in range(n)]
+    matrix = [[None for x in range(n)] for x in range(m)]
 
     # 처리
     # x_direction = 1 인 경우 오른쪽으로 한 칸씩 이동, -1이면 왼쪽으로 한 칸씩 이동, 0이면 정지
@@ -25,11 +25,11 @@ else:
         # 위아래로 움직이고 있을 때
         if x_direction == 0:
             # 위쪽 끝이나 아래쪽 끝에 부딪혔을 때
-            if (y, y_direction) in ((loop, -1), (n - loop - 1, 1)):
+            if (y, y_direction) in ((loop, -1), (m - loop - 1, 1)):
                 # 아래로 가던 경우 왼쪽, 위로 가던 경우 오른쪽으로 방향 변경
                 x_direction, y_direction = -y_direction, 0
         elif y_direction == 0:
-            if (x, x_direction) in ((loop, -1), (m - loop - 1, 1)):
+            if (x, x_direction) in ((loop, -1), (n - loop - 1, 1)):
                 # 왼쪽으로 가고 있었다면 다음 순서는 위쪽이고, 위로는 한 칸 덜 가야 하므로 loop 1 증가
                 if x_direction == -1:
                     loop += 1
