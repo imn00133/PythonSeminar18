@@ -11,22 +11,9 @@ def main():
     while True:
         computer_num = gernerate_num()
         exec_game(computer_num)
-        if game_exit():
+        if game_rerun():
             break
         print("다시 시작합니다.")
-
-
-def exec_game(computer_num):
-    """
-    사용자가 맞출 때까지 반복하는 함수이다.
-    """
-    number_question = 0
-    while True:
-        user_num = input_user_num()
-        if compare_num(computer_num, user_num):
-            print("축하합니다. %d번만큼 질문하여 맞추셨습니다." % number_question)
-            break
-        number_question += 1
 
 
 def gernerate_num():
@@ -44,17 +31,17 @@ def gernerate_num():
     return computer_num
 
 
-def verify_overlap(test_list):
+def exec_game(computer_num):
     """
-    리스트를 받아와 내부에 중복이 있는지 확인한다.
-    중복이 있으면 True, 없으면 False를 반환한다.
-
-    return: bool
+    사용자가 맞출 때까지 반복하는 함수이다.
     """
-    set_test_list = set(test_list)
-    if len(set_test_list) == len(test_list):
-        return False
-    return True
+    number_question = 0
+    while True:
+        user_num = input_user_num()
+        if compare_num(computer_num, user_num):
+            print("축하합니다. %d번만큼 질문하여 맞추셨습니다." % number_question)
+            break
+        number_question += 1
 
 
 def input_user_num():
@@ -83,10 +70,23 @@ def input_user_num():
         return user_value
 
 
+def verify_overlap(test_list):
+    """
+    리스트를 받아와 내부에 중복이 있는지 확인한다.
+    중복이 있으면 True, 없으면 False를 반환한다.
+
+    return: bool
+    """
+    set_test_list = set(test_list)
+    if len(set_test_list) == len(test_list):
+        return False
+    return True
+
+
 def compare_num(computer_num, user_num):
     """
     사용자와 컴퓨터 숫자를 비교해 strike, ball, out을 확인한다.
-    return: bool(strike==4)
+    return: bool(strike==4, True)
     """
     strike, ball, out = 0, 0, 0
     for index in range(USING_NUMBER_IN_GAME):
@@ -102,10 +102,10 @@ def compare_num(computer_num, user_num):
     return False
 
 
-def game_exit():
+def game_rerun():
     """
     게임 종료를 확인한다. 다시 할지 물어본다.
-    retrun bool(yes==False)
+    return: bool(yes==False)
     """
     while True:
         user_choice = input("다시 하시겠습니까?(yes/no) ")
