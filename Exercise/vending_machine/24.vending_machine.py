@@ -18,9 +18,9 @@ def return_charge(item_list, total_money):
     return 0
 
 
-def ctrl_str():
+def ctrl_str(permission):
     """
-    자판기의 종료, 돈 입력 같은 제어명령를 저장한 딕셔너리를 반환해 준다.
+    자판기의 종료, 돈 입력 같은 제어명령를 저장한 튜플을 반환해 준다.
     퍼미션에 따라 다른 값이 출력된다.
     'admin': 개수변경, 종료
     'normal': 돈 입력, 거스름돈, 종료
@@ -41,7 +41,7 @@ def ctrl_str_index(item_list, searching_value, permission='normal'):
     :params item_list, searching_value, permission='normal'
     :return 제어 명령의 위치
     """
-    return len(item_list) + ctrl_str()[permission].index(searching_value) + 1
+    return len(item_list) + ctrl_str(permission).index(searching_value) + 1
 
 
 def ctrl_print(permission='normal'):
@@ -52,10 +52,10 @@ def ctrl_print(permission='normal'):
     :param permission='normal'
     """
     if permission == 'admin':
-        for index, control_content in enumerate(ctrl_str()[permission], 1):
+        for index, control_content in enumerate(ctrl_str(permission), 1):
             print("{0}. {1}".format(index, control_content))
     else:
-        for index, control_content in enumerate(ctrl_str()[permission],
+        for index, control_content in enumerate(ctrl_str(permission),
                                                 len(item_list) + 1):
             print("{0}. {1}".format(index, control_content))
 
