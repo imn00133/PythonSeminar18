@@ -88,3 +88,21 @@ https://www.nature.com/articles/s41574-019-0156-z?utm_source=facebook&utm_medium
 
 How to explore chemical space using algorithms and automation
 https://www.nature.com/articles/s41570-018-0066-y?utm_source=facebook&utm_medium=social&utm_content=organic&utm_campaign=NRRJ_2_SJB_reviews_editorial_socialposts&fbclid=IwAR3AtnG5HVHRK9BYhCWtoHjX2G8cgWBeqvLm3iUBREvh_Yu51XmEFg33HFA
+
+마크다운 설명서
+https://gist.github.com/ninanung
+
+vi
+https://greatkim91.tistory.com/m/196?fbclid=IwAR3ZZEGsRqLTk_C5XlJJ75fjGpj1HWrmEsTlkqBP9YNwANzlr9hzH6FoQKs
+
+드론만들기
+https://m.blog.naver.com/PostView.nhn?blogId=scw0531&logNo=221285498257&targetKeyword=&targetRecommendationCode=1
+
+과학-그래픽 만드는 툴
+https://mindthegraph.com/
+
+알고리즘 학습에 대한 조언(면접)
+https://edykim.com/ko/post/advice-on-learning-algorithms/?fbclid=IwAR3C_766f4uRj2XhsovDkrXXIuWoB5YH6xU_YraCCjCJzRCPoadL17cyKmA
+
+교수/학습을 위한 20가지 심리학 핵심 원칙
+https://www.apa.org/ed/schools/teaching-learning/top-twenty-principles-korean.pdf
