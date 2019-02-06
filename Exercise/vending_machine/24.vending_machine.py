@@ -206,7 +206,6 @@ while True:
         else:
             total_money -= item_value
             item_list[select_value]['개수'] -= 1
-            print(item_list[select_value]['개수'])
             print("%s이/가 나왔습니다." % item_list[select_value]['물품'])
             if total_money < price_min:
                 total_money = return_charge(item_list, total_money)
