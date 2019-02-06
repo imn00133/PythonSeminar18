@@ -1,12 +1,27 @@
+"""
+자판기 과제 파일
+물품의 이름, 가격, 개수를 저장하고 돈을 입력받아 물품을 출력해준다.
+저장되는 파일의 이름은 item_list.txt이다.
+저장되는 파일내의 column명은 metadata_item()에 있다.
+"""
+# Author: Kim Jaehyeong
+# email: imn00133@gmail.com
+# date: 19.02.06
+
+
 def main():
     """
     프로그램의 시작
     """
-    item_list = read_item_file()
+    try:
+        item_list = read_item_file()
+    except Exception:
+        exit()
     total_money = 0
     while True:
+        print_item(item_list)
+        print("현재까지 넣은 돈은 %d원입니다.\n" % total_money)
         select_value = input_user_value(item_list)
-        print("")
 
         # 물품을 선택할 때
         if 0 < select_value <= len(item_list):
@@ -14,11 +29,8 @@ def main():
 
         # 돈 입력 선택했을 때
         elif select_value == ctrl_str_index(item_list, '돈 입력'):
-            input_money = int(input("돈을 넣으세요: "))
-            if input_money < 0:
-                print("잘못 입력하셨습니다.")
-            else:
-                total_money += input_money
+            input_money = distinguish_positive_num("돈을 넣으세요: ")
+            total_money += input_money
 
         # 거스름돈 선택
         elif select_value == ctrl_str_index(item_list, '거스름돈'):
@@ -35,17 +47,23 @@ def main():
             print("물품번호를 잘못 입력하셨습니다.")
 
 
+def distinguish_positive_num(print_value):
+    input_value = input(print_value)
+    while not input_value.isnumeric():
+        input_value = input(print_value)
+    return int(input_value)
+
+
 def input_user_value(item_list):
     """
     사용자의 입력값을 받는다.
     :param item_list
     :return select_value
     """
+    select_value = ""
     # isinstance(object, type) object에 입력된 type이 type과 같은지 확인한다.
     while not isinstance(select_value, int):
         # 목록의 리스트를 출력한다.
-        item_print(item_list)
-        print("현재까지 넣은 돈은 %d원입니다.\n" % total_money)
         select_value = input("뽑을 물품을 골라주세요: ")
 
         # admin모드 진입
@@ -53,10 +71,10 @@ def input_user_value(item_list):
             item_list = admin_mode(item_list)
         elif select_value.isnumeric():
             select_value = int(select_value)
-        return select_value
+            return select_value
 
 
-def item_print(item_list, permission='normal'):
+def print_item(item_list, permission='normal'):
     """
     아이템 목록을 출력한다.
     permission이 admin이면 개수를 보여준다.
@@ -71,10 +89,10 @@ def item_print(item_list, permission='normal'):
         else:
             print("")
     if permission != 'admin':
-        ctrl_print()
+        princ_ctrl(item_list)
 
 
-def ctrl_print(permission='normal'):
+def princ_ctrl(item_list, permission='normal'):
     """
     control string을 출력한다.
     퍼미션이 admin이면, item_list을 포함하지 않고 index를 출력하고
@@ -99,7 +117,7 @@ def ctrl_str(permission):
     :return CONTROL_STR, 딕셔너리이고 값은 튜플
     """
     CONTROL_STR = {
-        'admin': ('물품출력', '개수추가', '종료'),
+        'admin': ('물품추가', '물품변경', '물품삭제', '물품출력', '개수추가', '종료'),
         'normal': ('돈 입력', '거스름돈', '종료'),
         'error': ('종료')
         }
@@ -132,16 +150,17 @@ def select_item(item_list, select_value, total_money):
     else:
         total_money -= item_value
         item_list[select_value]['개수'] -= 1
-        print(item_list[select_value]['개수'])
         print("%s이/가 나왔습니다." % item_list[select_value]['물품'])
-        if total_money < item_price_min(item_list):
+        if total_money < min_item_price(item_list):
             total_money = return_charge(item_list, total_money)
     return total_money
 
 
-def item_price_min(item_list):
+def min_item_price(item_list):
     """
     item dict에서 가격이 가장 작은 값을 반환한다.
+    :param item_list
+    :return price_min
     """
     price_min = item_list[0]['가격']
     for item in item_list:
@@ -153,6 +172,7 @@ def item_price_min(item_list):
 def return_charge(item_list, total_money):
     """
     돈을 반환해주는 함수로 본 함수가 실행되면 파일을 저장한다.
+    :params item_list, total_money
     :return total_money = 0
     """
     write_item_file(item_list)
@@ -161,40 +181,119 @@ def return_charge(item_list, total_money):
     return total_money
 
 
+def metadata_item():
+    """
+    물품에 대한 metadata를 저장한다.
+    이중 tuple로 column의 이름과 형식이 저장된다.
+    """
+    return (('물품', 'str'), ('가격', 'int'), ('개수', 'int'))
+
+
+def add_item(item_list):
+    """
+    물품을 리스트 마지막에 추가한다.
+    :param item_list
+    :return item_list
+    """
+    question = "추가할 {}을/를 입력하세요: "
+    add_item_info = {}
+    for metadata_name, metadata_type in metadata_item():
+        if metadata_type == 'int':
+            metadata_value \
+                = distinguish_positive_num(question.format(metadata_name))
+            metadata_value = int(metadata_value)
+        else:
+            metadata_value = input(question.format(metadata_name))
+        add_item_info[metadata_name] = metadata_value
+    item_list.append(add_item_info)
+    return item_list
+
+
+def change_item(item_list):
+    """
+    list의 물품명이나 가격을 한다.
+    :param item_list
+    :return item_list
+    """
+    print_item(item_list, permission="admin")
+    select_value = distinguish_positive_num("변경할 물품을 선택해주세요: ")
+    select_value -= 1
+    print("%s을/를 선택하셨습니다." % item_list[select_value]['물품'])
+    name_temp = input("물품 이름 변경(값 미입력시, 변경하지 않음): ")
+    if name_temp != "":
+        print("물품 변경")
+        item_list[select_value]['물품'] = name_temp
+    value_temp = input("물품 가격 변경(값 미입력시, 변경하지 않음): ")
+    while value_temp != "" and (not value_temp.isnumeric()):
+        value_temp = input("물품 가격 변경(값 미입력시, 변경하지 않음): ")
+    if value_temp.isnumeric():
+        item_list[select_value]['가격'] = int(value_temp)
+    return item_list
+
+
+def remove_item(item_list):
+    """
+    list에서 물품을 삭제한다.
+    :param item_list
+    :return item_list
+    """
+    print_item(item_list, permission='admin')
+    select_value = distinguish_positive_num(
+        "삭제할 물품을 선택해주세요(목록에서 벗어난 수를 입력시 처음으로 돌아갑니다.): ")
+    if select_value <= len(item_list):
+        del_item = item_list.pop(select_value-1)
+        print("{}이/가 삭제되었습니다.".format(del_item['물품']))
+    return item_list
+
+
+def change_item_num(item_list):
+    print_item(item_list, permission='admin')
+    item_select = distinguish_positive_num("개수를 추가할 물품을 선택하세요: ")
+    if 0 < item_select <= len(item_list):
+        item_list[item_select - 1]['개수'] += \
+            distinguish_positive_num("추가할 개수를 입력해주세요: ")
+        return item_list
+    else:
+        print("물품을 잘못 선택하셨습니다.")
+
+
 def admin_mode(item_list):
     """
     admin모드로 접근한다. permission은 admin으로 되어있다.
     :param item_list
     :return item_list
     """
+    print("")
+    print("관리자모드")
     while True:
+        princ_ctrl(item_list, permission='admin')
+        select_value = distinguish_positive_num("원하는 작업을 선택해주세요: ")
         print("")
-        ctrl_print(permission='admin')
-        select_value = int(input("원하는 작업을 선택해주세요: "))
-        print("")
-        if select_value == ctrl_str_index([], '물품출력', 'admin'):
-            item_print(item_list, permission='admin')
+        if select_value == ctrl_str_index([], '물품추가', 'admin'):
+            item_list = add_item(item_list)
+        elif select_value == ctrl_str_index([], '물품변경', 'admin'):
+            item_list = change_item(item_list)
+        elif select_value == ctrl_str_index([], '물품삭제', 'admin'):
+            item_list = remove_item(item_list)
+        elif select_value == ctrl_str_index([], '물품출력', 'admin'):
+            print_item(item_list, permission='admin')
         elif select_value == ctrl_str_index([], '개수추가', 'admin'):
-            item_print(item_list, permission='admin')
-            item_select = int(input("개수를 추가할 물품을 선택하세요: "))
-            if 0 < item_select <= len(item_list):
-                item_list[item_select - 1]['개수'] += \
-                    int(input("추가할 개수를 입력해주세요: "))
-            else:
-                print("물품을 잘못 선택하셨습니다.")
+            change_item_num(item_list)
         elif select_value == ctrl_str_index([], '종료', 'admin'):
             write_item_file(item_list)
             print("자판기 모드로 돌아갑니다.")
+            print_item(item_list)
             return item_list
         else:
             print("잘못 입력하셨습니다.")
+        print("")
 
 
 def read_item_file():
     """
     item_list.txt를 읽어 각 물품의 dictionary를 담은 리스트를 되돌려준다.
-    파일이 잘못되었을 경우, 관리자에게 연락을 출력하고 종료한다.
-    return: itme_list
+    파일이 잘못되었을 경우, 관리자에게 연락하라는 말을 출력하고 종료한다.
+    return: item_list
     """
     item_list = []
     try:
@@ -209,40 +308,50 @@ def read_item_file():
                     item_temp_dict[title[index]] = item[index]
                 converse_data_to_int(item_temp_dict)
                 item_list.append(item_temp_dict)
-    except Exception:
+    except FileNotFoundError:
+        open("item_list.txt", mode='w', encoding='utf-8').close()
         print("관리자에게 연락하십시오.")
+    except Exception:
+        error_msg = "초기화할 때 오류가 있습니다.\n관리자에게 연락하십시오."
+        print(error_msg)
+        raise
     return item_list
 
 
-def converse_data_to_int(conversion_dict):
+def converse_data_to_int(item_temp_dict):
     """
-    item dictionary를 받아 key에서 int로 변경할 값을 변경한다.
+    metadata_item을 통해 int로 변경할 값을 찾아 변경한다.
+    파일을 읽을 때 dictionary로 저장된 값 중 int가 될 값을 int로 저장한다.
+    :param item_temp_dict
+    :return item_temp_dict
     """
-    conversion_key = ("가격", "개수")
-    for key in conversion_key:
-        conversion_dict[key] = int(conversion_dict[key])
-    return conversion_dict
+    for metadata_name, metadata_type in metadata_item():
+        if metadata_type == 'int':
+            item_temp_dict[metadata_name] \
+                = int(item_temp_dict[metadata_name])
+    return item_temp_dict
 
 
 def write_item_file(item_list):
     """
-    item_list.txt에 지금 상태를 저장한다.
+    item_list.txt에 현재 상태를 저장한다.
     """
-    title = item_list[0].keys()
+    str_temp_list = []
+    str_temp = ""
+    for metadata_name, _ in metadata_item():
+        str_temp += metadata_name
+        str_temp += " "
+    str_temp_list.append(str_temp)
+    for item_dict in item_list:
+        str_temp = ""
+        for metadata_name, _ in metadata_item():
+            str_temp += str(item_dict[metadata_name])
+            str_temp += " "
+        str_temp_list.append(str_temp)
     with open("item_list.txt", mode='w', encoding='utf-8') as file:
-        title_temp = ""
-        for str_temp in title:
-            title_temp += str(str_temp)
-            title_temp += " "
-        file.write("%s\n" % title_temp)
-        for item_dict in item_list:
-            str_temp = ""
-            for key in title:
-                str_temp += str(item_dict[key])
-                str_temp += " "
+        for str_temp in str_temp_list:
             file.write("%s\n" % str_temp)
-        return None
 
 
-if __name__ == __main__:
+if __name__ == "__main__":
     main()
