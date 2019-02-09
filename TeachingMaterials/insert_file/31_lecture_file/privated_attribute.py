@@ -16,6 +16,7 @@ class Beagle(Dog):
 
 
 my_dog = Beagle()
+# __value로 새로운 속성 설정
 my_dog.__value = 10
 print("my_dog value의 값", my_dog.get_value())
 print(my_dog.__dict__)

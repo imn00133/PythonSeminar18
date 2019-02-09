@@ -15,7 +15,7 @@ print("지름")
 print(circle.diameter)
 
 # 바로 계산이 된다.
-circle.radious = 5
+circle.radius = 5
 print("반지름이 5일 때 지름")
 print(circle.diameter)
 

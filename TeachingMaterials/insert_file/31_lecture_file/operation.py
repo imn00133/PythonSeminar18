@@ -9,7 +9,7 @@ class Character:
         return self.name == other.name
 
     def __sub__(self, other):
-        self.hp = self.hp + self.defence - self.attack
+        self.hp = self.hp + self.defence - other.attack
         print("현재 %s의 hp는 %d입니다." % (self.name, self.hp))
 
 
