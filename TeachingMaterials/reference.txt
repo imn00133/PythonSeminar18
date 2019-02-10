@@ -109,3 +109,9 @@ https://www.apa.org/ed/schools/teaching-learning/top-twenty-principles-korean.pd
 
 세가의 신입 사원 교육 과정에서 배우는 게임 프로그래밍의 정석
 http://www.hanbit.co.kr/store/books/look.php?p_code=B9727823975
+
+git
+-오픈튜토리얼
+https://opentutorials.org/module/2676/15261
+-우하한형제들-git-flow
+http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html
