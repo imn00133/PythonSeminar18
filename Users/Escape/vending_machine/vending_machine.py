@@ -1,168 +1,439 @@
-# 이름, 가격, 개수 저장/로드 구현
-# 관리자에게 연락하십시오 구현
-# 파일 자동 저장 미구현
+class VendingMachine:
+    INDEX_START = 1
 
-# 파일로부터 물품 불러오기
-# 뭔가 나중에 쓸 것 같아서 함수로 남겨놓습니다.
+    def __init__(self):
+        self._product = list()
+        self._money = 0
+
+    # 돈이 얼마요(읽기 전용)
+    @property
+    def money(self):
+        return self._money
+
+    # 돈을 넣는 것
+    def money_in(self, value):
+        if value >= 0:
+            self._money += value
+        else:
+            raise ValueError
+
+    # 돈을 빼는 것
+    # 매개 변수 없이 쓰면 전부 반환
+    # 실패 시 에러 발생
+    def money_out(self, value=None):
+        if value is None:
+            self._money = 0
+        elif 0 <= value <= self._money:
+            self._money -= value
+        else:
+            raise ValueError
+
+    def add(self, name, price, amount=0):
+        self._product.append(Product(name, price, amount))
+
+    def delete(self, index, alert=False):
+        if alert:
+            print('%s을(를) 제거합니다.' %
+                  self._product[index - self.INDEX_START].name)
+        del(self._product[index - self.INDEX_START])
+
+    @property
+    def productcount(self):
+        return len(self._product)
+
+    def product(self, index=None):
+        if index is None:
+            return self._product
+        else:
+            return self._product[index - self.INDEX_START]
+
+    def purchase(self, index, amount=1):
+        if int(amount) == amount and amount >= 0:  # \
+            # and self.purchasable(index, amount):
+            success = 0
+            choice = self._product[index - self.INDEX_START]
+            for purchase in range(0, amount):
+                if self._money <= 0 or choice.amount <= 0:
+                    break
+                else:
+                    choice.amount -= 1
+                    success += 1
+                    self._money -= choice.price
+            return success
 
 
-def load_product(file_name='product.met'):
-    result = list()
-    with open(file_name, mode='r', encoding='UTF-8') as f:
+class Product:
+    def __init__(self, name, price, amount=0):
+        self._name = name
+        self._price = price
+        self._amount = amount
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def price(self):
+        return self._price
+
+    @property
+    def amount(self):
+        return self._amount
+
+    # 유효성 검사 부분 집어넣기
+    @name.setter
+    def name(self, name):
+        self._name = name
+
+    @price.setter
+    def price(self, price):
+        self.price = price
+
+    @amount.setter
+    def amount(self, amount):
+        self._amount = amount
+
+
+def load_product():
+    result = VendingMachine()
+    with open(FILE_NAME, mode='r', encoding='UTF-8') as f:
         for line in f.readlines():
             if line[0] == '(' and line[-2] == ')':
                 product = line[1:len(line) - 2].split(',')
                 for i, detail in enumerate(product):
                     product[i] = detail.strip()
                 product[1], product[2] = int(product[1]), int(product[2])
-                result.append(product)
+                result.add(product[0], product[1], product[2])
     return result
 
 
-def save_product(product_list, file_name='product.met'):
-    with open(file_name, mode='w', encoding='UTF-8') as f:
-        for product in product_list:
-            product[1], product[2] = str(product[1]), str(product[2])
-            f.write('(%s)\n' % ', '.join(product))
-            product[1], product[2] = int(product[1]), int(product[2])
-    return len(product)
+def save_product(vending_machine):
+    with open(FILE_NAME, mode='w', encoding='UTF-8') as f:
+        # p = product
+        for p in vending_machine.product():
+            f.write(
+                '(%s)\n' % ', '.join([p.name, str(p.price), str(p.amount)])
+            )
 
 
-# 프로그램 시작
-# 초기 물품 구성
-try:
-    product_list = load_product()
-    if len(product_list) == 0:
-        raise FileNotFoundError
-except FileNotFoundError:
-    print('관리자에게 연락하십시오.')
+def customer_mode():
+    # 돈 넣고
+    money_in()
+    while True:
+        task = customer_task().lower()
+        # task 반환값
+        # 'admin': 관리자 모드 진입
+        # 'in'   : 돈 넣기
+        # 'out'  : 거스름돈
+        # 'exit' : 종료
+        # (int)  : 해당 번호의 물품 구매
+
+        if task.isnumeric():
+            purchase(int(task))
+        else:
+            if task == 'admin':
+                admin_mode()
+            elif task == 'in':
+                money_in()
+            elif task == 'out':
+                money_out()
+            elif task == 'exit':
+                money_out()
+                exit_program()
+
+
+def admin_mode():
+    while True:
+        task = admin_task()
+        if task == 'add':
+            add_product()
+        if task == 'modify':
+            modify_product()
+        if task == 'delete':
+            delete_product()
+        if task == 'info':
+            try:
+                show_product(True)
+            except AssertionError:
+                print('등록된 물품이 없습니다.')
+        if task == 'refill':
+            refill_product()
+        if task == 'exit':
+            print('관리자 모드를 종료합니다.')
+            break
+
+
+def exit_program():
+    print('자판기 이용을 종료합니다.')
     exit()
 
-# 돈 넣기
-money = 0
-money_in = input('돈을 넣으세요: ')
 
-# 돈 대신 이상한 거 넣으면 걸러내는 부분
-while True:
-    try:
-        if int(money_in) < 0:
-            raise ValueError
-    except ValueError:
-        # 실패할 경우 다시 입력받습니다.
-        money_in = input('돈을 제대로 넣으세요: ')
+def money_in():
+    money = input('돈을 넣으세요: ')
+    # 돈 대신 이상한 거 넣으면 걸러내는 부분
+    while True:
+        try:
+            if int(money) < 0:
+                raise ValueError
+        except ValueError:
+            # 실패할 경우 다시 입력받습니다.
+            money = input('돈을 제대로 넣으세요: ')
+        else:
+            machine.money_in(int(money))
+            break
+
+
+def money_out():
+    save_product(machine)
+    if machine.money > 0:
+        print('%d원이 반환됩니다.' % machine.money)
+        machine.money_out()
     else:
-        money += int(money_in)
-        break
+        print('잔액이 없어 돈이 반환되지 않습니다.')
 
 
-# 물품을 불러와서 출력합니다.
-# cnt = 물품의 index(출력 이후, cnt는 전체 물품 개수가 됩니다.)
-# product_list[cnt][0] = 이름, product_list[cnt][1] = 가격
-mode = 'customer'
-while True:
-    if mode == 'customer':
-        for cnt, (p_name, p_price, p_stock) in \
-                enumerate(product_list, start=1):
-            print(
-                '%d. %s(%d원)' %
-                (cnt, p_name, p_price)
-            )
+def show_product(show_amount=False):
+    assert machine.productcount > 0
+    for cnt, p in enumerate(machine.product(), start=1):
+        if show_amount:
+            print('%d. %s(%d원) 재고량: %d' % (cnt, p.name, p.price, p.amount))
+        else:
+            print('%d. %s(%d원)' % (cnt, p.name, p.price))
+
+
+def customer_task():
+    # 호갱 모드의 작업 수행
+    while True:
+        try:
+            show_product()
+        except AssertionError:
+            pass
+        cnt = machine.productcount
+
         print('%d. 돈 넣기' % (cnt + 1))
         print('%d. 거스름돈' % (cnt + 2))
         print('%d. 종료' % (cnt + 3))
 
-        # 물품을 선택받습니다.
-        product_in = input('잔액: %d원\n뽑을 물품을 선택해주세요: ' % money)
-        if not product_in.isnumeric():
-            if product_in.lower() == 'admin':
-                mode = 'admin'
-                print('Admin 모드로 전환합니다.')
+        # 하게 될 동작을 선택받습니다.
+        try:
+            product = input('잔액: %d원\n뽑을 물품을 선택해주세요: ' % machine.money)
+            if not product.isnumeric():
+                if product.lower() == 'admin':
+                    return 'admin'
+                else:
+                    raise ValueError
             else:
-                print('물품 번호를 잘못 입력하셨습니다.')
-        else:
-            product_in = int(product_in)
-            if product_in > cnt + 3 or product_in < 0:
-                print('물품 번호를 잘못 입력하셨습니다.')
-            # 거스름돈을 선택한 경우
-            elif product_in == cnt + 1:
-                money_in = input('돈을 넣으세요: ')
-                while not money_in.isnumeric():
-                    money_in = input('돈을 제대로 넣으세요: ')
-                money += int(money_in)
-            elif product_in == cnt + 2:
-                save_product(product_list)
-                if money > 0:
-                    print('%d원이 반환됩니다.' % money)
-                    money = 0
+                product = int(product)
+                if product > cnt + 3 or product < 0:
+                    raise ValueError
+                # 돈을 넣으려고 한 경우
+                elif product == cnt + 1:
+                    return 'in'
+                # 거스름돈을 선택한 경우
+                elif product == cnt + 2:
+                    return 'out'
+                # 종료를 시도한 경우
+                elif product == cnt + 3:
+                    return 'exit'
+                # 물품을 선택한 경우
                 else:
-                    print('잔액이 없어 돈이 반환되지 않습니다.')
-            # 종료를 시도한 경우
-            elif product_in == cnt + 3:
-                # 꼭 그렇게 똑같은 부분을 반복해서 입력해야만 속이 후련했녛어엏ㄱ
-                save_product(product_list)
-                if money > 0:
-                    print('%d원이 반환됩니다.' % money)
-                    money = 0
-                else:
-                    print('잔액이 없어 돈이 반환되지 않습니다.')
-                print('자판기 이용을 종료합니다.')
-                exit()
-            # 물품을 선택한 경우
-            else:
-                # 리스트는 0번부터 시작하는데 물품번호는 1번부터 시작이므로 1을 빼줍니다.
-                # 돈이 충분하면 물품을 내보냅니다.
-                product = product_list[product_in - 1]
-                if money < product[1]:
-                    print('돈이 부족하여 구매할 수 없습니다.')
-                elif product[2] <= 0:
-                    print('고르신 물품의 재고가 부족하여 구매가 불가능합니다.')
-                else:
-                    product[2] -= 1
-                    money -= product[1]
-                    print('%s을(를) 구매하셨습니다.' % product[0])
-                    # 가장 싼 물품 가격 구하기(물품 정보를 리스트로 저장해서 min을 못 씀)
-                    cnt = 0
-                    price_min = product_list[0][1]
-                    while cnt < len(product_list):
-                        price_min = min(price_min, product_list[cnt][1])
-                        cnt += 1
-                    if 0 < money < price_min:
-                        print('%d원이 반환됩니다.' % money)
-                        money = 0
-    elif mode == 'admin':
-        action = input('''Admin 모드
-1. 물품 목록 및 개수 확인
-2. 물품 개수 변경
-3. 종료
+                    return str(product)
+        except UnicodeDecodeError:
+            print('다시 입력해주세요.')
+        except ValueError:
+            print('물품 번호를 잘못 입력하셨습니다.')
+
+
+def admin_task():
+    while True:
+        action = input('''관리자 모드
+1. 물품 추가
+2. 물품 정보 변경
+3. 물품 삭제
+4. 물품 정보 확인
+5. 재고 추가
+6. 종료
 진행할 작업을 선택하세요: ''')
-        if action in ('1', '2'):
-            for cnt, (p_name, p_price, p_stock) in \
-                 enumerate(product_list, start=1):
-                print(
-                    '%d. %s(현 재고량: %d개)' %
-                    (cnt, p_name, p_stock)
-                )
-            if action == '2':
-                product_in = input('개수를 변경할 물품을 선택해주세요: ')
-                if not product_in.isnumeric():
-                    product_in = str(cnt + 1)
-                while not 1 <= int(product_in) <= cnt:
-                    product_in = input('올바른 물품 번호를 입력해주세요: ')
-                    if not product_in.isnumeric():
-                        product_in = cnt + 1
-                product_in = int(product_in)
-                # 제대로 입력한 경우
-                product = product_list[product_in - 1]
-                stock_in = input('물품(%s)의 개수를 설정해주세요: ' % product[0])
-                while not stock_in.isnumeric():
-                    stock_in = input('올바른 개수를 입력해주세요: ')
-                stock_in = int(stock_in)
-                print('%s의 개수를 %d개로 재설정합니다.'
-                      % (product[0], stock_in))
-                product[2] = stock_in
+        if action == '1':
+            return 'add'
+        elif action == '2':
+            return 'modify'
         elif action == '3':
-            save_product(product_list)
-            mode = 'customer'
-            print('일반(사용자) 모드로 돌아갑니다.')
+            return 'delete'
+        elif action == '4':
+            return 'info'
+        elif action == '5':
+            return 'refill'
+        elif action == '6':
+            return 'exit'
         else:
-            print('잘못 입력하셨습니다. 다시 입력해주세요.')
+            print('잘못 입력하셨습니다.')
+            continue
+        break
+
+
+def add_product():
+    while True:
+        print("새 물품을 추가합니다.")
+        print("(아무것도 입력하지 않으면 취소합니다.)")
+        name = input("이름을 입력해주세요: ")
+        if name == '':
+            break
+        price = input("가격을 입력해주세요: ")
+        if price == '':
+            break
+        amount = input("수량을 입력해주세요: ")
+        if amount == '':
+            break
+
+        try:
+            machine.add(name, int(price), int(amount))
+            break
+        except ValueError:
+            print("입력값이 잘멧되었습니다.")    # 못
+            continue
+
+
+def modify_product():
+    while True:
+        while True:
+            cancel = False
+            print("물품의 정보를 수정합니다.")
+            try:
+                show_product()
+            except AssertionError:
+                print('등록된 물품이 없어 수정이 불가능합니다.')
+                print('먼저 물품을 추가해주세요.')
+                cancel = True
+                break
+            try:
+                index = input('정보를 수정할 물품을 선택해주세요: ')
+                if not index.isnumeric():
+                    raise ValueError
+                else:
+                    index = int(index)
+                    if not 0 <= index - VendingMachine.INDEX_START \
+                             <= machine.productcount:
+                        raise ValueError
+            except ValueError:
+                print('입력값이 잘멧되었습니다.')
+                continue
+            else:
+                break
+
+        if cancel:
+            break
+        name = input("이름을 입력해주세요: ")
+        price = input("가격을 입력해주세요: ")
+        try:
+            if name.strip() != '':
+                machine.product(index).name = name.strip()
+            if price.strip() != '':
+                machine.product(index).price = int(price)
+            break
+        except ValueError:
+            print("입력값이 잘멧되었습니다.")    # 못
+            continue
+
+
+def delete_product():
+    while True:
+        print("물품을 삭제합니다.")
+        try:
+            show_product()
+        except AssertionError:
+            print('등록된 물품이 없어 삭제가 불가능합니다.')
+            break
+
+        index = input('삭제할 물품을 선택해주세요(공란으로 둘 시 취소): ')
+        try:
+            machine.delete(int(index), alert=True)
+        except ValueError:
+            if index == '':
+                break
+            else:
+                print('입력값이 잘멧되었습니다.')
+                continue
+        except IndexError:
+            print('입력값이 잘멧되었습니다.')
+            continue
+        else:
+            break
+
+
+def refill_product():
+    while True:
+        print("물품의 재고를 추가합니다.")
+        cancel = False
+        try:
+            show_product(True)
+        except AssertionError:
+            print('등록된 물품이 없어 재고를 리필할 수 없습니다.')
+            print('먼저 물품을 추가해주세요.')
+            cancel = True
+            break
+        try:
+            index = input('물품을 선택해주세요: ')
+            machine.product(int(index))
+        except ValueError:
+            print('입력값이 잘멧되었습니다.')
+            continue
+        except IndexError:
+            print('입력값이 잘멧되었습니다.')
+            continue
+        else:
+            break
+
+    while True:
+        if cancel:
+            break
+        amount = input("추가할 수량을 입력해주세요: ")
+        try:
+            machine.product(int(index)).amount += int(amount)
+            break
+        except ValueError:
+            print("입력값이 잘멧되었습니다.")    # 못
+            continue
+
+
+def purchase(index):
+    # 리스트는 0번부터 시작하는데 물품번호는 1번부터 시작이므로 1을 빼줍니다.
+    # 돈이 충분하면 물품을 내보냅니다.
+    product = machine.product(index)
+    if machine.money < product.price:
+        print('돈이 부족하여 구매할 수 없습니다.')
+    elif product.amount <= 0:
+        print('고르신 물품의 재고가 부족하여 구매가 불가능합니다.')
+    else:
+        machine.purchase(index)
+        print('%s을(를) 구매하셨습니다.' % product.name)
+        # 가진 돈이 가장 싼 물품 가격보다 적을 경우 자동으로 돈 반환
+        price_min = min([x.price for x in machine.product()])
+        if 0 < machine.money < price_min:
+            money_out()
+
+
+# 파일 로드
+FILE_NAME = 'product.met'
+try:
+    machine = load_product()
+except FileNotFoundError:
+    print('자판기 진열대가 도난당했습니다.')
+    print('명탐정에게 연락하십시오.')
+    machine = VendingMachine()
+    save_product(machine)
+except ValueError:
+    print('초기화 중 오류가 발생하고 말았습니다.')
+    print('관리자에게 연락하십시오.')
+    machine = VendingMachine()
+    save_product(machine)
+else:
+    # 데이터가 없는 경우
+    if len(machine.product()) == 0:
+        print('자판기 진열대에 아무것도 없습니다.')
+        print('관리자에게 연락하십시오.')
+        machine = VendingMachine()
+        save_product(machine)
+
+# 호갱 모드로 진입
+customer_mode()
