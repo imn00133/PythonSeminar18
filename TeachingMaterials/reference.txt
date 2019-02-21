@@ -113,5 +113,9 @@ http://www.hanbit.co.kr/store/books/look.php?p_code=B9727823975
 git
 -오픈튜토리얼
 https://opentutorials.org/module/2676/15261
--우하한형제들-git-flow
+-우아한형제들-git-flow
 http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html
+-그래프형 커밋 히스토리
+https://kweon.tistory.com/4
+좋은 git 커밋 메시지 작성하기
+https://meetup.toast.com/posts/106
