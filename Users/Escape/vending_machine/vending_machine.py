@@ -87,7 +87,7 @@ class Product:
 
     @price.setter
     def price(self, price):
-        self.price = price
+        self._price = price
 
     @amount.setter
     def amount(self, amount):

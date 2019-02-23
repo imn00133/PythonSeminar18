@@ -34,7 +34,7 @@ def write_horizontal(digit, size, floor):
     return s
 
 
-# 세로줄(|) 1출 출력 함수
+# 세로줄(|) 1줄 출력 함수
 def write_vertical(digit, size, floor):
     # floor 값에 따라 윗부분과 아랫부분 중 무엇을 출력할지 결정합니다.
     # 1의 경우 BOTTOM_LEFT, BOTTOM_RIGHT 부분에 대한 작업
