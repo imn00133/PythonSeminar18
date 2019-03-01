@@ -119,3 +119,81 @@ http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strate
 https://kweon.tistory.com/4
 좋은 git 커밋 메시지 작성하기
 https://meetup.toast.com/posts/106
+
+웹크롤링
+나만의 웹크롤링 만들기
+https://beomi.github.io/2017/02/27/HowToMakeWebCrawler-With-Selenium/?fbclid=IwAR2BC36Qj4Cy_Ktthgz84dvcM06izDlGVElwQYsC66-KwSz4OFEeK0htc2o
+
+r마크다운
+https://www.rstudio.com/wp-content/uploads/2016/02/rmarkdown-cheatsheet-kr.pdf
+
+datetime 시간대관련
+pytz
+https://edykim.com/ko/post/pytz-python-library-for-world-time-zone-definition/
+스포카-python 시간대
+https://spoqa.github.io/2019/02/15/python-timezone.html
+
+기술블로그
+업체별 기술블로그
+https://medium.com/@Dongmin_Jang/%EC%97%85%EC%B2%B4%EB%B3%84-%EA%B8%B0%EC%88%A0-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EB%A6%AC%EC%8A%A4%ED%8A%B8-e2d736d0e658
+스포카 기슬블로그
+https://spoqa.github.io/2018/01/23/follow-the-changing-web-platform.html
+
+html, css
+https://www.w3schools.com/?fbclid=IwAR0G2bKnKzrutluAhmN6k3fFj64_6V9GmHnTYt7TUBHgPD6V2KgdIGHxLOc
+veamcamp
+https://www.youtube.com/veamcamp?fbclid=IwAR2xdXKoI1320q_LTO2nkIgvJGf677Qn9dZzzMY5rx3kwDLeMtsumWXdEak
+
+딥러닝을 이용한 자연어 처리 입문
+https://wikidocs.net/book/2155
+딥러닝을 이용한 자연어 처리 심화
+https://wikidocs.net/book/2159
+텐서플로 블로그-책
+https://tensorflow.blog/
+솔라리스의 인공지능 연구실
+
+상담심리
+https://m.blog.naver.com/PostView.nhn?blogId=ezerkenegdo8&logNo=220824260725
+https://lazini.tistory.com/75
+
+알고리즘 트레이딩
+https://wikidocs.net/book/110
+
+12 of the best free Natural Language Processing and Machine Learning educational resources
+http://blog.aylien.com/12-of-the-best-free-natural-language-processing-and-machine-learning-educational-resources/?fbclid=IwAR0Y8rZps7CkFMxiAsp56tJFQOcRjJTfn0XSvT6MKiIau4WBI7o6bL2XY68
+
+javascript 책 추천
+https://asfirstalways.tistory.com/246
+
+고려사항
+데이터베이스 구축, 인공지능, 약물바이오데이터에 관심있는 개발자님을 구인중에 있습니다. 많은지원부탁드려요!
+
+채용 상세
+1. 담당업무: 
+-약물데이터 DB구축
+-인공지능 알고리즘 추천서비스 개발
+-Python, R, SQL
+
+2. 자격요건: 
+-DB구축경험
+-4대보험 의무가입
+
+3. 우대사항
+-영어 커뮤니케이션 능력
+-MongoDB, Hbase등 NoSQL 데이터 모델링과 시스템 구축
+-AWS 등의 클라우드 기반 인프라 활용
+-웹 프론트엔드 개발 경력
+
+4. 근무시간: 주 5일 
+-급여: 400만원
+-iMac제공, 4대보험가입
+-회사위치: 강남역 부근
+
+5. 지원방법제출서류 : 지원서(이력서, 자기소개서 등)
+-문의 및 지원 : 이메일 bioaihealth@gmail.com
+
+* 바이오에이아이는 이렇게 일해요.
+1. 직급이 없는 수평문화를 지향해요.
+2. 자율적으로 스스로 일해요.
+3. 자신이 하는일이 재미있는 분들이 일하고 있어요.
+4. 구성원에게 도움이 된다면 회사는 얼마든지 변화할 준비가 되어있어요.
