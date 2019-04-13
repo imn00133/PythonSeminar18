@@ -22,7 +22,7 @@ def write_horizontal(digit, size, floor):
     s = str()
 
     # 입력받은 숫자 하나하나씩 순환합니다.
-    for d in (int(x) for x in digit):
+    for d in map(int, digit):
         # 해당 부분을 출력해야 할 경우 양 옆 공백과 함께 size만큼의 '-'을 출력합니다.
         if byte_data[d]:
             s += ' ' + '-' * size + ' '
@@ -44,7 +44,7 @@ def write_vertical(digit, size, floor):
     s = str()
 
     # 입력받은 숫자 하나하나씩 순환합니다.
-    for d in (int(x) for x in digit):
+    for d in map(int, digit):
         # 첫 열 출력 여부 데이터를 확인 후 출력해야 하는 경우 첫 열에 '|'를 출력합니다.
         if data_l[d]:
             s += '|'
