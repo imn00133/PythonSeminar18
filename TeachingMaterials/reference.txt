@@ -197,3 +197,54 @@ https://asfirstalways.tistory.com/246
 2. 자율적으로 스스로 일해요.
 3. 자신이 하는일이 재미있는 분들이 일하고 있어요.
 4. 구성원에게 도움이 된다면 회사는 얼마든지 변화할 준비가 되어있어요.
+
+바이오 지능방-서울대학교
+장병탁교수
+https://bi.snu.ac.kr/~scai/
+
+git-graph
+https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
+
+서체-타이포 그래피 책
+http://www.typographyseoul.com/news/detail/563
+http://font.co.kr/thet/thet_detail.asp?itemIdx=3933&itemType=34
+http://www.fontclub.co.kr/?p=3666
+책에는 어떤 서체
+http://www.bookk.co.kr/community/knowhow/read?id=22
+
+
+https://humbledude.github.io/blog/2019/02/27/basic-data-analysis/?fbclid=IwAR3OD9x6Y8qmjZektdQOBqjKA6xCxdSU226KQHovuscYIBEg45EMCC-Zw9k
+https://blog.goodaudience.com/top-10-machine-learning-algorithms-2a9a3e1bdaff?fbclid=IwAR2p6pAfnbXEyfOU3aFAE66uEfLz15ERPp0brz8DzE-jrSf4pdTCaLu79tY
+
+개인 프로젝트
+https://medium.com/@hatemogi
+
+안반데기-강릉
+설매재
+
+Rest API 백엔드 만들기
+https://medium.com/aha-official/tagged/development
+
+Javascript 책
+https://brunch.co.kr/@timotolkie/25
+https://asfirstalways.tistory.com/246
+
+패스워드 암호화
+https://ppss.kr/archives/16823
+https://brunch.co.kr/@jangcnet/11
+
+python 오픈소스 50개
+https://hackernoon.com/50-popular-python-open-source-projects-on-github-in-2018-c750f9bf56a0?fbclid=IwAR1mQE0bzBRS6ISIzdR3TZbajiwYnv_NjqdXx30HYEHXV4lA2xeJXy5kYpA
+
+전자서명
+https://d2.naver.com/helloworld/744920
+
+https://www.realclass.co.kr/class?cId=7&type=package
+
+머신러닝 인터뷰 준비
+https://docs.google.com/document/d/10bJK8S4T7sBIP-pzdQm9xRpW0HcLsrh6D047pE_kFE8/edit?fbclid=IwAR1rtLpTZKScwLHPJmFYfLiI4r98wyMfZzS6kK_vcI3jLrs_dwkJtai-PwE
+
+장고
+https://www.inflearn.com/course/%EB%82%98%EC%9D%98-%EC%B2%AB-django-%EC%95%B1-%EB%A7%8C%EB%93%A4%EA%B8%B0/
+장고-documentation 및 튜토리얼
+https://docs.djangoproject.com/ko/2.2/
