@@ -12,9 +12,9 @@ TeachingMaterials에는 강의 파일 및 강의 자료에 들어간 파일, git
 강의 자료는 TeachingMaterials/lecuter_file 디렉터리 내부를 참고한다.
 
 ## 주의사항
-본 프로젝트는 종료되었으며, 최신 내용은 https://github.com/imn00133/PythonSeminar에서 진행한다.
+본 프로젝트는 종료되었으며, 최신 내용은 https://github.com/imn00133/PythonSeminar 에서 진행한다.
 
-강의는 https://bk-worm.tistory.com에서 볼 수 있다.
+강의는 https://bk-worm.tistory.com 에서 읽어볼 수 있다.
 
 ## 프로젝트 참여자
 만든이: 일병 김재형  
