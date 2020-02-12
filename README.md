@@ -1,4 +1,5 @@
 # python seminar 18
+## 개요
 18년도 4분기 공군에서 진행한 파이썬 세미나
 
 Exercise는 주마다 제출한 과제를 날짜 및 과제별로 정리하여 올려놓았다. 각 디렉터리에는 강의자의 과제 소스가 들어있다.
@@ -10,18 +11,25 @@ Diary는 수업을 진행하면서 생각한 점 및 개선점, 평가를 적어
 TeachingMaterials에는 강의 파일 및 강의 자료에 들어간 파일, git 실험 파일들이 들어가있다.  
 강의 자료는 TeachingMaterials/lecuter_file 디렉터리 내부를 참고한다.
 
+## 주의사항
+본 프로젝트는 종료되었으며, 최신 내용은 https://github.com/imn00133/PythonSeminar에서 진행한다.
+
+강의는 https://bk-worm.tistory.com에서 볼 수 있다.
+
+## 프로젝트 참여자
 만든이: 일병 김재형  
 이메일: imn00133@gmail.com   
 참여자: 하사 박\*\*, 병장 김\*\*, 병장 이\*\*, 상병 박\*\*, 상병 김\*\*, 일병 정\*\*, 일병 오\*\*, 학생 오\*\*
 
-주교재:  
+## 참고자료
+### 주교재  
 * Do it! 점프 투 파이썬  
 * 뇌를 자극하는 파이썬 3
 * 코딩도장
 * 컴퓨팅 사고
 * 코딩을 지탱하는 기술
 
-부교재:  
+### 부교재
 * 컴퓨터 사이언스 부트캠프 with 파이썬
 * 전문가를 위한 파이썬
 * Python 더 쉽게, 더 깊게
@@ -41,7 +49,7 @@ TeachingMaterials에는 강의 파일 및 강의 자료에 들어간 파일, git
 * 파이썬을 이용한 웹 크롤링과 스크레이핑
 * 파이썬으로 데이터 주무르기
 
-참고링크:  
+### 참고링크
 * [점프 투 파이썬](https://wikidocs.net/book/1)
 * [파이썬 - 기본을 갈고 닦자!](https://wikidocs.net/book/1553)
 * [파이썬3에 뛰어들기](https://juehan.github.io/DiveIntoPython3_Korean_Translation/)
@@ -60,6 +68,6 @@ TeachingMaterials에는 강의 파일 및 강의 자료에 들어간 파일, git
 * [Samsung SW Expert Academy](https://swexpertacademy.com/main/main.do)
 * [realpython/python3-OOP](https://realpython.com/python3-object-oriented-programming/)
 
-참고자료:
+### 참고자료
 * 리눅스 마스터 1급 정복하기
 * 쉽게 배우는 알고리즘: 관계중심의 사고법
