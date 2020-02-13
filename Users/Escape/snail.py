@@ -9,7 +9,8 @@ else:
     # 빈 행렬 만들기
     # [None for x in range(m)] >> m개의 None으로 이루어진 리스트
     # [[~] for x in range(n)] >> 위의 리스트 n개로 이루어진 리스트
-    matrix = [[None for x in range(n)] for x in range(m)]
+    # 저는 바보였습니다.
+    matrix = [[None] * n for x in range(m)]
 
     # 처리
     # x_direction = 1 인 경우 오른쪽으로 한 칸씩 이동, -1이면 왼쪽으로 한 칸씩 이동, 0이면 정지
@@ -19,6 +20,7 @@ else:
     x_direction, y_direction = 1, 0
     loop = 0
     for cnt in range(1, m * n + 1):
+    
         # 배치되는 수의 범위를 고려하여 자릿수 맞춤
         matrix[y][x] = \
          ('%1d', '%2d', '%3d')[(m * n >= 100) + (m * n >= 10)] % cnt
